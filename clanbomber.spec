@@ -18,7 +18,6 @@ Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
 BuildRequires:	zlib-devel libhermes-devel clanlib0.6-devel libclanlib-mikmod
 BuildRequires:	libmikmod-devel libclanlib-sound automake1.7
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 ClanBomber is a free (GPL) Bomberman-like multiplayer game that uses ClanLib, a
