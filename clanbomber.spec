@@ -52,17 +52,6 @@ install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
 install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
 install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 
-mkdir -p %{buildroot}/%{_menudir}
-cat << EOF > %{buildroot}/%{_menudir}/%{name}
-?package(%{name}): \
-command="%{_gamesbindir}/%{name}" \
-icon="%{name}.png" \
-needs="x11" \
-section="More Applications/Games/Arcade" \
-title="ClanBomber" \
-longtitle="%{Summary}" \
-xdg="true"
-EOF
 
 # XDG menu
 install -d %{buildroot}%{_datadir}/applications
@@ -93,7 +82,6 @@ rm -rf %{buildroot}
 %doc AUTHORS COPYING README
 %{_gamesbindir}/*
 %{_gamesdatadir}/*
-%{_menudir}/%{name}
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
