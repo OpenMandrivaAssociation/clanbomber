@@ -3,7 +3,7 @@
 Summary:	%{Summary}
 Name:		clanbomber
 Version:	1.05
-Release:	%mkrel 7
+Release:	%mkrel 8
 License:	GPL
 Group:		Games/Arcade
 URL:		http://clanbomber.sourceforge.net/
@@ -59,7 +59,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=ClanBomber
 Comment=%{Summary}
-Exec=%{_gamesbindir}/%{name}
+Exec=soundwrapper %{_gamesbindir}/%{name}
 Icon=%{name}
 Terminal=false
 Type=Application
