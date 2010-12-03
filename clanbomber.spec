@@ -14,10 +14,10 @@ Source13:	%{name}.48.png
 Patch8:		clanbomber-1.02a-gcc-3.3.patch
 Patch9:		%{name}-0.5-compile-without-xdisplay.patch
 Patch10:        clanbomber-1.05-gcc3_4.patch
-Requires(post): desktop-file-utils
-Requires(postun): desktop-file-utils
+Patch11:	clanbomber-1.05-newer-make.patch
+Patch12:	clanbomber-1.05-fix-build.patch
 BuildRequires:	zlib-devel libhermes-devel clanlib0.6-devel libclanlib-mikmod
-BuildRequires:	libmikmod-devel libclanlib-sound automake1.7
+BuildRequires:	libmikmod-devel libclanlib-sound automake
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -34,10 +34,11 @@ recommended to play ClanBomber with friends (3-8 players are really fun).
 %patch8 -p1 -b .peroyvind
 %patch9 -p1 -b .peroyvind
 %patch10 -p1
-perl -pi -e 's|\@datadir\@|\$(datadir)|' */Makefile.am */*/Makefile.am
-aclocal-1.7
+%patch11 -p0
+%patch12 -p0
 
 %build
+autoreconf -fi
 # (gc) workaround g++ exception bug when -fomit-frame-pointer is set
 export CFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer" CXXFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer"
 %configure2_5x --bindir=%{_gamesbindir} --datadir=%{_gamesdatadir}
@@ -46,7 +47,7 @@ make
 %install
 rm -rf %{buildroot}
 
-%makeinstall bindir=%{buildroot}%{_gamesbindir} datadir=%{buildroot}%{_gamesdatadir}
+%makeinstall_std
 
 install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
 install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
