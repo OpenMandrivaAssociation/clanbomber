@@ -3,7 +3,7 @@
 Summary:	%{Summary}
 Name:		clanbomber
 Version:	1.05
-Release:	%mkrel 12
+Release:	%mkrel 13
 License:	GPL
 Group:		Games/Arcade
 URL:		http://clanbomber.sourceforge.net/
