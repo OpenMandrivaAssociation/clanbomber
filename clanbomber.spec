@@ -40,7 +40,7 @@ recommended to play ClanBomber with friends (3-8 players are really fun).
 autoreconf -fi
 # (gc) workaround g++ exception bug when -fomit-frame-pointer is set
 export CFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer" CXXFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer"
-%configure2_5x
+%configure2_5x --bindir=%{_gamesbindir} --datadir=%{_gamesdatadir}
 make
 
 %install
@@ -66,14 +66,11 @@ Type=Application
 Categories=X-MandrivaLinux-MoreApplications-Games-Arcade;Game;ArcadeGame;
 EOF
 
-
 %files
 %doc AUTHORS COPYING README
-%{_bindir}/*
+%{_gamesbindir}/*
+%{_gamesdatadir}/*
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
-%{_datadir}/%{name}/
 %{_datadir}/applications/mandriva-%{name}.desktop
-
-
