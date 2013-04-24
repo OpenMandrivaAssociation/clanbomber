@@ -16,7 +16,7 @@ Patch9:		%{name}-0.5-compile-without-xdisplay.patch
 Patch10:        clanbomber-1.05-gcc3_4.patch
 Patch11:	clanbomber-1.05-newer-make.patch
 Patch12:	clanbomber-1.05-fix-build.patch
-BuildRequires:	zlib-devel libhermes-devel clanlib0.6-devel libclanlib-mikmod
+BuildRequires:	zlib-devel hermes-devel clanlib0.6-devel libclanlib-mikmod
 BuildRequires:	libmikmod-devel libclanlib-sound automake
 
 %description
