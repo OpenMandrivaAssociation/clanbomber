@@ -2,22 +2,25 @@
 
 Summary:	%{Summary}
 Name:		clanbomber
-Version:	1.05
-Release:	15
+Version:	2.1.1
+Release:	1
 License:	GPL
 Group:		Games/Arcade
-URL:		http://clanbomber.sourceforge.net/
-Source0:	http://www.clanbomber.de/files/%{name}-%{version}.tar.bz2
+URL:		https://savannah.nongnu.org/projects/clanbomber/
+Source0:	https://download.savannah.gnu.org/releases/clanbomber/%{name}-%{version}.tar.lzma
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
-Patch8:		clanbomber-1.02a-gcc-3.3.patch
-Patch9:		%{name}-0.5-compile-without-xdisplay.patch
-Patch10:        clanbomber-1.05-gcc3_4.patch
-Patch11:	clanbomber-1.05-newer-make.patch
-Patch12:	clanbomber-1.05-fix-build.patch
-BuildRequires:	zlib-devel hermes-devel clanlib0.6-devel libclanlib-mikmod
-BuildRequires:	libmikmod-devel libclanlib-sound automake
+Patch1:		gcc7-fixes.patch
+Patch2:		clanbomber-2.1.1-mageia-boost-filesystem.patch
+Patch3:		clang.patch
+BuildRequires:	boost-devel
+BuildRequires:	pkgconfig(sdl) >= 1.2.0
+BuildRequires:	pkgconfig(SDL_image)
+BuildRequires:	pkgconfig(SDL_mixer)
+BuildRequires:	pkgconfig(SDL_ttf)
+BuildRequires:	pkgconfig(SDL_gfx)
+BuildRequires:	gettext-devel
 
 %description
 ClanBomber is a free (GPL) Bomberman-like multiplayer game that uses ClanLib, a
@@ -29,22 +32,21 @@ recommended to play ClanBomber with friends (3-8 players are really fun).
 
 %prep
 
-%setup -q
-%patch8 -p1 -b .peroyvind
-%patch9 -p1 -b .peroyvind
-%patch10 -p1
-%patch11 -p0
-%patch12 -p0
+%autosetup -p1
+
+
+# make autoreconf happy
+sed -i -e 's,dist-lzma,subdir-objects,' -e 's,-Werror,,' configure.ac
 
 %build
 autoreconf -fi
 # (gc) workaround g++ exception bug when -fomit-frame-pointer is set
-export CFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer" CXXFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer"
-%configure2_5x --bindir=%{_gamesbindir} --datadir=%{_gamesdatadir}
-make
+export CFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer -Wno-c++11-narrowing"
+export CXXFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer -Wno-c++11-narrowing"
+%configure --bindir=%{_gamesbindir} --datadir=%{_gamesdatadir} --with-boost-libdir=%{_libdir}
+%make_build
 
 %install
-rm -rf %{buildroot}
 
 %makeinstall_std
 
@@ -66,7 +68,9 @@ Type=Application
 Categories=X-MandrivaLinux-MoreApplications-Games-Arcade;Game;ArcadeGame;
 EOF
 
-%files
+%find_lang %{name}
+
+%files -f %{name}.lang
 %doc AUTHORS COPYING README
 %{_gamesbindir}/*
 %{_gamesdatadir}/*

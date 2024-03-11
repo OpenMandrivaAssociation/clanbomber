@@ -1,76 +1,0 @@
---- clanbomber/Makefile.am.build	2010-12-03 06:55:20.000000000 +0000
-+++ clanbomber/Makefile.am	2010-12-03 06:55:54.000000000 +0000
-@@ -31,10 +31,10 @@
- .PHONY: files
- 
- files:
--        @files=s $(DISTFILES) 2> /dev/null ; for p in $$files; do \
-+	@files=s $(DISTFILES) 2> /dev/null ; for p in $$files; do \
- 	  echo $$p; \
-         done
--        @for subdir in $(SUBDIRS); do \
-+	@for subdir in $(SUBDIRS); do \
- 	  files=d $$subdir; $(MAKE) files | grep -v "make\[[1-9]\]"; \
-           for file in $$files; do \
-             echo $$subdir/$$file; \
---- clanbomber/music/Makefile.am.build	2010-12-03 06:57:43.000000000 +0000
-+++ clanbomber/music/Makefile.am	2010-12-03 06:58:02.000000000 +0000
-@@ -10,10 +10,10 @@
- .PHONY: files
- 
- files:
--        @files=s $(DISTFILES) 2> /dev/null ; for p in $$files; do \
-+	@files=s $(DISTFILES) 2> /dev/null ; for p in $$files; do \
- 	  echo $$p; \
-         done
--        @for subdir in $(SUBDIRS); do \
-+	@for subdir in $(SUBDIRS); do \
- 	  files=d $$subdir; $(MAKE) files | grep -v "make\[[1-9]\]"; \
-           for file in $$files; do \
-             echo $$subdir/$$file; \
---- clanbomber/maps/Makefile.am.build	2010-12-03 06:59:07.000000000 +0000
-+++ clanbomber/maps/Makefile.am	2010-12-03 06:59:47.000000000 +0000
-@@ -106,10 +106,10 @@
- .PHONY: files
- 
- files:
--        @files=s $(DISTFILES) 2> /dev/null ; for p in $$files; do \
-+	@files=s $(DISTFILES) 2> /dev/null ; for p in $$files; do \
- 	  echo $$p; \
--        done
--        @for subdir in $(SUBDIRS); do \
-+	done
-+	@for subdir in $(SUBDIRS); do \
- 	  files=d $$subdir; $(MAKE) files | grep -v "make\[[1-9]\]"; \
-           for file in $$files; do \
-             echo $$subdir/$$file; \
---- clanbomber/pics/Makefile.am.build	2010-12-03 07:00:57.000000000 +0000
-+++ clanbomber/pics/Makefile.am	2010-12-03 07:01:19.000000000 +0000
-@@ -3,10 +3,10 @@
- .PHONY: files
- 
- files:
--        @files=s $(DISTFILES) 2> /dev/null ; for p in $$files; do \
-+	@files=s $(DISTFILES) 2> /dev/null ; for p in $$files; do \
- 	  echo $$p; \
-         done
--        @for subdir in $(SUBDIRS); do \
-+	@for subdir in $(SUBDIRS); do \
- 	  files=d $$subdir; $(MAKE) files | grep -v "make\[[1-9]\]"; \
-           for file in $$files; do \
-             echo $$subdir/$$file; \
---- clanbomber/wavs/Makefile.am.build	2010-12-03 07:02:49.000000000 +0000
-+++ clanbomber/wavs/Makefile.am	2010-12-03 07:03:16.000000000 +0000
-@@ -3,10 +3,10 @@
- .PHONY: files
- 
- files:
--        @files=s $(DISTFILES) 2> /dev/null ; for p in $$files; do \
-+	@files=s $(DISTFILES) 2> /dev/null ; for p in $$files; do \
- 	  echo $$p; \
-         done
--        @for subdir in $(SUBDIRS); do \
-+	@for subdir in $(SUBDIRS); do \
- 	  files=d $$subdir; $(MAKE) files | grep -v "make\[[1-9]\]"; \
-           for file in $$files; do \
-             echo $$subdir/$$file; \

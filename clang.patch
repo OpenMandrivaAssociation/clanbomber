@@ -1,0 +1,22 @@
+--- clanbomber-2.1.1/src/cbe/AudioSimple.h.orig	2024-03-11 00:02:25.122415849 +0000
++++ clanbomber-2.1.1/src/cbe/AudioSimple.h	2024-03-11 00:02:36.882975963 +0000
+@@ -38,7 +38,7 @@
+     virtual void close() = 0;
+     virtual ~AudioSimple() {};
+     virtual AudioBuffer *createBuffer(boost::filesystem::path file) = 0;
+-    static std::string getName() {};
++    static std::string getName() { return ""; };
+   };
+ };
+ 
+--- clanbomber-2.1.1/src/Menu.cpp.orig	2024-03-11 00:06:06.474411218 +0000
++++ clanbomber-2.1.1/src/Menu.cpp	2024-03-11 00:06:13.675159286 +0000
+@@ -359,7 +359,7 @@
+ // 	primary->SetFont( primary, Resources::Font_small()  );
+ // 	primary->SetColor(primary, 0xFF, 0xFF, 0xFF, 0xFF );
+ // 	primary->DrawString( primary, "V"VERSION, -1, right_border+20, vert+20, DSTF_TOPRIGHT );
+-	Resources::Font_small()->render("V"PACKAGE_VERSION, right_border+20,
++	Resources::Font_small()->render("V" PACKAGE_VERSION, right_border+20,
+                                         vert+20, cbe::FontAlignment_0topright);
+ 	// primary->Flip( primary, NULL, DSFLIP_WAITFORSYNC  );
+ 	CB_Flip();

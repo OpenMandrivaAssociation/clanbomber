@@ -1,0 +1,13 @@
+diff -up ./src/ClanBomber.cpp.tv ./src/ClanBomber.cpp
+diff -up ./src/Credits.h.tv ./src/Credits.h
+--- ./src/Credits.h.tv	2017-09-26 10:39:19.794165114 +0200
++++ ./src/Credits.h	2017-09-26 10:39:27.801313997 +0200
+@@ -47,7 +47,7 @@ protected:
+ 	int   speed;
+ 	bool  stopped;
+  private:
+-	static const float yoffset_start = 50;
++	static const constexpr float yoffset_start = 50;
+ 	static const int normal_speed = 40;
+ 	static const int text_height = 40;
+ 	
