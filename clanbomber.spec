@@ -57,16 +57,7 @@ install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 
 # XDG menu
 install -d %{buildroot}%{_datadir}/applications
-cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
-[Desktop Entry]
-Name=ClanBomber
-Comment=%{Summary}
-Exec=soundwrapper %{_gamesbindir}/%{name}
-Icon=%{name}
-Terminal=false
-Type=Application
-Categories=X-MandrivaLinux-MoreApplications-Games-Arcade;Game;ArcadeGame;
-EOF
+mv %{buildroot}%{_gamesdatadir}/applications/*.desktop %{buildroot}%{_datadir}/applications/
 
 %find_lang %{name}
 
@@ -77,4 +68,4 @@ EOF
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
-%{_datadir}/applications/mandriva-%{name}.desktop
+%{_datadir}/applications/*.desktop
