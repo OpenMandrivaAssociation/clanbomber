@@ -3,7 +3,7 @@
 Summary:	%{Summary}
 Name:		clanbomber
 Version:	2.1.1
-Release:	3
+Release:	4
 License:	GPL
 Group:		Games/Arcade
 URL:		https://savannah.nongnu.org/projects/clanbomber/
