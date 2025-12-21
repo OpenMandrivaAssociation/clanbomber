@@ -14,6 +14,11 @@ Source13:	%{name}.48.png
 Patch1:		gcc7-fixes.patch
 Patch2:		clanbomber-2.1.1-mageia-boost-filesystem.patch
 Patch3:		clang.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	boost-devel
 BuildRequires:	pkgconfig(sdl) >= 1.2.0
 BuildRequires:	pkgconfig(SDL_image)
