@@ -16,7 +16,6 @@ Patch2:		clanbomber-2.1.1-mageia-boost-filesystem.patch
 Patch3:		clang.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:	boost-devel
