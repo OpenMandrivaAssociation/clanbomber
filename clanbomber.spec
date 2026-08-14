@@ -76,7 +76,8 @@ for name in ("src/Client.cpp", "src/Server.cpp"):
     t = t.replace(
         '*resolver.resolve(server_name, net_server_udp_port.str())',
         '*resolver.resolve(server_name, net_server_udp_port.str()).begin()')
-    t = t.replace('address.from_string(client_ip)', 'address = make_address(client_ip)')
+    t = t.replace('address.from_string(client_ip)',
+                  'address = boost::asio::ip::make_address(client_ip)')
     p.write_text(t)
 PY
 
