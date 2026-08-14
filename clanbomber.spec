@@ -41,6 +41,11 @@ recommended to play ClanBomber with friends (3-8 players are really fun).
 
 # make autoreconf happy
 sed -i -e 's,dist-lzma,subdir-objects,' -e 's,-Werror,,' configure.ac
+# Boost.Asio 1.87+ removed io_service and address::from_string
+sed -i \
+	-e 's/boost::asio::io_service/boost::asio::io_context/g' \
+	-e 's/address::from_string/make_address/g' \
+	src/Server.h src/Client.h src/Server.cpp
 
 %build
 autoreconf -fi
