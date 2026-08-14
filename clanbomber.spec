@@ -18,6 +18,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	slibtool
 BuildRequires:	make
+BuildRequires:	python
 BuildRequires:	boost-devel
 BuildRequires:	pkgconfig(sdl) >= 1.2.0
 BuildRequires:	pkgconfig(SDL_image)
@@ -41,11 +42,36 @@ recommended to play ClanBomber with friends (3-8 players are really fun).
 
 # make autoreconf happy
 sed -i -e 's,dist-lzma,subdir-objects,' -e 's,-Werror,,' configure.ac
-# Boost.Asio 1.87+ removed io_service and address::from_string
+# Boost.Asio 1.87+ removed io_service, address::from_string, resolver::query
 sed -i \
 	-e 's/boost::asio::io_service/boost::asio::io_context/g' \
 	-e 's/address::from_string/make_address/g' \
-	src/Server.h src/Client.h src/Server.cpp
+	src/Server.h src/Client.h src/Server.cpp src/Client.cpp
+python3 - <<'PY'
+from pathlib import Path
+import re
+for name in ("src/Client.cpp", "src/Server.cpp"):
+    p = Path(name)
+    t = p.read_text()
+    t = re.sub(
+        r'tcp::resolver::query query\(([^;]+)\);\s*tcp::endpoint endpoint = \*resolver\.resolve\(query\);',
+        r'tcp::endpoint endpoint = *resolver.resolve(\1);',
+        t, flags=re.S)
+    # udp::resolver::query query(host, port);  x = *resolver.resolve(query);
+    t = re.sub(
+        r'(udp::resolver::)query query\(([^;]+)\);',
+        r'// \1query(\2);',
+        t)
+    t = t.replace('*resolver.resolve(query)', '*resolver.resolve(server_name, net_server_udp_port.str())')
+    # leftover tcp resolve(query) if the first regex missed protocol-first form
+    t = t.replace(
+        'tcp::resolver::query query(tcp::v4(), server_name, net_server_tcp_port.str());',
+        '')
+    t = t.replace(
+        '*resolver.resolve(query)',
+        '*resolver.resolve(server_name, net_server_tcp_port.str())')
+    p.write_text(t)
+PY
 
 %build
 autoreconf -fi
